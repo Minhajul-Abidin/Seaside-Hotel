@@ -14,4 +14,6 @@ public interface IRoomService {
     List<String> getAllRoomTypes();
 
     List<Room> getAllRooms();
+
+    void deleteRoomById(Long id);
 }

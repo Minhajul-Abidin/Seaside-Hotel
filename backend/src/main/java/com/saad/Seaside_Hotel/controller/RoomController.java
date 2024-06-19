@@ -8,6 +8,7 @@ import com.saad.Seaside_Hotel.response.RoomResponse;
 import com.saad.Seaside_Hotel.service.IBookedRoomService;
 import com.saad.Seaside_Hotel.service.IRoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,6 +59,20 @@ public class RoomController {
         }
         return ResponseEntity.ok(roomResponses);
     }
+
+    // Controller function to delete room by the given id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteRoomById(
+            @PathVariable Long id
+    ){
+        try {
+            roomService.deleteRoomById(id);
+            return  ResponseEntity.ok(true);
+        }catch(Error error){
+            return ResponseEntity.ok(false);
+        }
+    }
+
 
     // helper method to convert room object to roomResponse object to send to frontend
     private RoomResponse getRoomResponse(Room room) {
