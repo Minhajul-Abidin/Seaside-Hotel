@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllRooms } from "../utils/apiFunctions";
+import { deleteRoomById, getAllRooms } from "../utils/apiFunctions";
 import RoomPaginator from "../common/RoomPaginator";
 
 const ExistingRoom = () => {
@@ -35,6 +35,26 @@ const ExistingRoom = () => {
   const handlePaginationClick = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
+
+  const handleRoomDelete = async (id) =>{
+    try {
+      const data = await deleteRoomById(id)
+      if(data === true){
+        setSuccessMessage(`Room with id ${id} deleted`)
+        fetchAllRooms()
+      }
+      else{
+        console.error("Error : Deleting room")
+      }
+    } catch (error) {
+      setErrorMessage(error.message)
+    }
+    setTimeout(() => {
+      setSuccessMessage("")
+      setErrorMessage("")
+    },3000)
+  }
+
   return (
     <>
       <h2 className="mt-20 mb-8 text-2xl font-bold mx-auto size-fit">Existing rooms</h2>
@@ -89,8 +109,8 @@ const ExistingRoom = () => {
                 <td className="px-6 py-4">₹{room.roomPrice}</td>
                 <td className="px-6 py-4">
                   <div className="flex justify-end gap-4">
-                    <button>
-                      {/* TODO - Add delete room fuctionality */}
+                    <button
+                    onClick={() =>handleRoomDelete(room.id)}>
                         <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
