@@ -27,6 +27,7 @@ public class RoomController {
     private final IRoomService roomService;
     private final IBookedRoomService bookedRoomService;
 
+    // function to add room in the database
     @PostMapping
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("picture") MultipartFile picture,
@@ -40,29 +41,25 @@ public class RoomController {
 
     }
 
+    // function to get all room types
     @GetMapping("/room-types")
     public List<String> getRoomTypes(){
         return roomService.getAllRoomTypes();
     }
 
+    // function to get all rooms
     @GetMapping
     public ResponseEntity<List<RoomResponse>> getAllRooms(){
         List<Room> rooms = roomService.getAllRooms();
         List<RoomResponse> roomResponses = new ArrayList<>();
         for(Room room : rooms){
-//            byte[] picture = roomService.getRoomPicture(room.getId());
-//            String base64picture = Base64.encodeBase64String()
             RoomResponse roomResponse = getRoomResponse(room);
             roomResponses.add(roomResponse);
         }
         return ResponseEntity.ok(roomResponses);
     }
 
-
-
-
-
-
+    // helper method to convert room object to roomResponse object to send to frontend
     private RoomResponse getRoomResponse(Room room) {
         List<BookedRoom> bookings = getAllBookingsByRoomId(room.getId());
         List<BookedRoomResponse> bookingInfo = bookings.stream()
@@ -82,6 +79,7 @@ public class RoomController {
                 room.isBooked(), pictureByte, bookingInfo);
     }
 
+    // currently a helper function to get all the bookings of a particular room by its id
     private List<BookedRoom> getAllBookingsByRoomId(Long id) {
         return bookedRoomService.getAllBookingsByRoomId(id);
     }

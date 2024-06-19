@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { addRoom } from "../utils/apiFunctions";
 import RoomTypeSelector from "../common/RoomTypeSelector";
+import ExistingRoom from "./ExistingRoom"
 
 const AddRoom = () => {
     const [newRoom, setNewRoom] = useState({
@@ -73,9 +74,10 @@ const AddRoom = () => {
                                 <input
                                     required
                                     type="number"
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    className="shadow appearance-none w-full py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 placeholder-gray-700 border rounded focus:outline-none focus:shadow-outline"
                                     id="roomPrice"
                                     name="roomPrice"
+                                    placeholder="Enter room price"
                                     value={newRoom.roomPrice}
                                     onChange={handleRoomInputChange}
                                 />
@@ -91,26 +93,30 @@ const AddRoom = () => {
                                 type="file" 
                                 name="picture" 
                                 id="picture" 
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="shadow focus:ring-indigo-500 focus:border-indigo-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 onChange={handleImageChange}
                                 />
                                 {imagePreview && (
+                                    <div className="flex flex-row justify-between">
+                                    <p className="my-auto font-bold">Image preview : </p>
                                     <img 
                                     src={imagePreview}
                                     alt="Room Picture"
                                     style={{maxWidth : "400px", maxHeight : "400px"}}
-                                    className="mb-4 mt-2" />
+                                    className="mb-4 mt-2 border-solid border-4  border-gray-600 border-spacing-8 hover:p-1" />
+                                    </div>
                                 )}
                             </div>
                             <div  className="flex justify-between mt-4">
                                 <button type="submit" 
-                                className=" bg-indigo-600 rounded-r-lg hover:bg-indigo-700 focus:bg-indigo-500
-                                 text-white font-bold py-2 px-4 rounded focus:outline-none 
+                                className=" bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:bg-indigo-500
+                                 text-white font-bold py-2 px-4  focus:outline-none mx-auto
                                  focus:shadow-outline">Save room</button>
                             </div>
                         </form>
                     </div>
                 </div>
+                <ExistingRoom/>
             </section>
         </>
 

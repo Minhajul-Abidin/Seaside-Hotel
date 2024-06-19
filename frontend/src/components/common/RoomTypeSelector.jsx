@@ -55,7 +55,7 @@ const RoomTypeSelector = ({handleRoomInputChange, newRoom}) => {
                 {showNewRoomTypeInput && (
                     <div className="relative text-gray-700">
                         <input type="text" 
-                        className="shadow appearance-none w-full py-2 px-3 placeholder-gray-600 border rounded focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none w-full py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 placeholder-gray-700 border rounded focus:outline-none focus:shadow-outline"
                         placeholder="Enter new room type"
                         onChange={handleNewRoomTypeInputChange}/>
                         <button
