@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteRoomById, getAllRooms } from "../utils/apiFunctions";
+import { deleteRoomById, getAllRooms, getAllRoomsForTable } from "../utils/apiFunctions";
 import RoomPaginator from "../common/RoomPaginator";
 
 const ExistingRoom = () => {
@@ -24,7 +24,7 @@ const ExistingRoom = () => {
   const fetchAllRooms = async () => {
     setIsLoading(true);
     try {
-      const data = await getAllRooms();
+      const data = await getAllRoomsForTable();
       setRooms(data);
       setIsLoading(false);
     } catch (error) {

@@ -2,6 +2,7 @@ package com.saad.Seaside_Hotel.service;
 
 import com.saad.Seaside_Hotel.model.Room;
 import com.saad.Seaside_Hotel.repository.RoomRepository;
+import com.saad.Seaside_Hotel.response.RoomTableResponse;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,10 @@ public class RoomServiceImpl implements IRoomService{
     @Override
     public void deleteRoomById(Long id) {
         roomRepository.deleteById(id);
+    }
+
+    @Override
+    public List<RoomTableResponse> getAllRoomsForTable() {
+        return roomRepository.findAllForTable();
     }
 }

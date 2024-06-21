@@ -1,6 +1,7 @@
 package com.saad.Seaside_Hotel.service;
 
 import com.saad.Seaside_Hotel.model.Room;
+import com.saad.Seaside_Hotel.response.RoomTableResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -16,4 +17,6 @@ public interface IRoomService {
     List<Room> getAllRooms();
 
     void deleteRoomById(Long id);
+
+    List<RoomTableResponse> getAllRoomsForTable();
 }

@@ -5,6 +5,7 @@ import com.saad.Seaside_Hotel.model.BookedRoom;
 import com.saad.Seaside_Hotel.model.Room;
 import com.saad.Seaside_Hotel.response.BookedRoomResponse;
 import com.saad.Seaside_Hotel.response.RoomResponse;
+import com.saad.Seaside_Hotel.response.RoomTableResponse;
 import com.saad.Seaside_Hotel.service.IBookedRoomService;
 import com.saad.Seaside_Hotel.service.IRoomService;
 import lombok.RequiredArgsConstructor;
@@ -71,6 +72,20 @@ public class RoomController {
         }catch(Error error){
             return ResponseEntity.ok(false);
         }
+    }
+
+    // function to get all rooms for rooms table in admin section
+    @GetMapping("table")
+    public ResponseEntity<List<RoomTableResponse>> getAllRoomsForTable(){
+        List<RoomTableResponse> roomTableResponses = roomService.getAllRoomsForTable();
+        return ResponseEntity.ok(roomTableResponses);
+    }
+
+    // helper method to convert room object to roomTableResponse object to send to frontend
+    private RoomTableResponse getRoomTableResponse(Room room) {
+        return new RoomTableResponse(room.getId(),
+                room.getRoomType(), room.getRoomPrice(),
+                room.isBooked());
     }
 
 

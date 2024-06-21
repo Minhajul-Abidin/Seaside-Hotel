@@ -50,3 +50,13 @@ export async function deleteRoomById(id){
         throw new Error("Error : Deleting room")
     }
 }
+
+// Function to get all rooms for table in admin section
+export async function getAllRoomsForTable(){
+    try {
+        const response = await api.get("/rooms/table")
+        return response.data
+    } catch (error) {
+        throw new Error("Error : Fetching rooms")
+    }
+}
