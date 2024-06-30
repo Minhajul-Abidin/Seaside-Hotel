@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { addRoom } from "../utils/apiFunctions";
 import RoomTypeSelector from "../common/RoomTypeSelector";
 import ExistingRoom from "./ExistingRoom"
+import { getAllRoomsForTable } from "../utils/apiFunctions";
 
 const AddRoom = () => {
     const [newRoom, setNewRoom] = useState({
@@ -12,6 +13,21 @@ const AddRoom = () => {
     const [imagePreview, setImagePreview] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
     const [errorMessage, setErrorMessage] = useState("")
+
+    // rooms is defined here so that submit also has access to it and passed to ExistingRoom component via props
+    const [rooms, setRooms] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchAllRooms = async () => {
+        setIsLoading(true);
+        try {
+          const data = await getAllRoomsForTable();
+          setRooms(data);
+          setIsLoading(false);
+        } catch (error) {
+          setErrorMessage(error.message);
+        }
+      };
 
     const handleRoomInputChange = (e) =>{
         const name = e.target.name
@@ -36,6 +52,7 @@ const AddRoom = () => {
                 setNewRoom({picture : null,  roomType : "" ,roomPrice : ""})
                 setErrorMessage("")
                 setImagePreview("")
+                fetchAllRooms()
             }
             else{
                 setErrorMessage("Error : Adding room")
@@ -116,7 +133,10 @@ const AddRoom = () => {
                         </form>
                     </div>
                 </div>
-                <ExistingRoom/>
+                <ExistingRoom rooms = {rooms}
+                fetchAllRooms ={fetchAllRooms}
+                isLoading = {isLoading}
+                />
             </section>
         </>
 

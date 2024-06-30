@@ -81,14 +81,6 @@ public class RoomController {
         return ResponseEntity.ok(roomTableResponses);
     }
 
-    // helper method to convert room object to roomTableResponse object to send to frontend
-    private RoomTableResponse getRoomTableResponse(Room room) {
-        return new RoomTableResponse(room.getId(),
-                room.getRoomType(), room.getRoomPrice(),
-                room.isBooked());
-    }
-
-
     // helper method to convert room object to roomResponse object to send to frontend
     private RoomResponse getRoomResponse(Room room) {
         List<BookedRoom> bookings = getAllBookingsByRoomId(room.getId());

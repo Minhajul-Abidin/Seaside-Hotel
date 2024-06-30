@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { deleteRoomById, getAllRooms, getAllRoomsForTable } from "../utils/apiFunctions";
 import RoomPaginator from "../common/RoomPaginator";
 
-const ExistingRoom = () => {
-  const [rooms, setRooms] = useState([]);
+const ExistingRoom = ({ rooms, fetchAllRooms,isLoading }) => {
+  
   const [currentpage, setCurrentPage] = useState(1);
   const [roomsPerPage] = useState(8);
-  const [isLoading, setIsLoading] = useState(false);
+  
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -20,17 +20,6 @@ const ExistingRoom = () => {
   const indexOfLastRoom = currentpage * roomsPerPage;
   const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
   const currentRooms = rooms.slice(indexOfFirstRoom, indexOfLastRoom);
-
-  const fetchAllRooms = async () => {
-    setIsLoading(true);
-    try {
-      const data = await getAllRoomsForTable();
-      setRooms(data);
-      setIsLoading(false);
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
-  };
 
   const handlePaginationClick = (pageNumber) => {
     setCurrentPage(pageNumber)
