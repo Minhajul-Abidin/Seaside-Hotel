@@ -71,6 +71,10 @@ const EditRoom = () => {
         } catch (error) {
             console.error(error)
             setErrorMessage(error.message)
+            setTimeout(() => {
+                setErrorMessage("")
+            }, 5000);
+
         }
     }
     
