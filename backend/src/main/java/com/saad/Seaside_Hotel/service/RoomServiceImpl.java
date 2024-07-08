@@ -1,7 +1,10 @@
 package com.saad.Seaside_Hotel.service;
 
+import com.saad.Seaside_Hotel.exception.InternalServerException;
+import com.saad.Seaside_Hotel.exception.ResourceNotFoundException;
 import com.saad.Seaside_Hotel.model.Room;
 import com.saad.Seaside_Hotel.repository.RoomRepository;
+import com.saad.Seaside_Hotel.response.RoomEditResponse;
 import com.saad.Seaside_Hotel.response.RoomTableResponse;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -53,5 +56,29 @@ public class RoomServiceImpl implements IRoomService{
     @Override
     public List<RoomTableResponse> getAllRoomsForTable() {
         return roomRepository.findAllForTable();
+    }
+
+    @Override
+    public Room editRoom(Long id, String roomType, BigDecimal roomPrice, byte[] pictureBytes) {
+
+        // TODO - This method needs optimization as it first query the data then update then insert.
+
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Error : Room not found"));
+        if(roomType != null) room.setRoomType(roomType);
+        if(roomPrice != null) room.setRoomPrice(roomPrice);
+        if(pictureBytes != null && pictureBytes.length > 0){
+            try{
+                room.setPicture(new SerialBlob(pictureBytes));
+            }catch (SQLException exception){
+                throw new InternalServerException("Error : Editing room");
+            }
+        }
+        return roomRepository.save(room);
+    }
+
+    @Override
+    public RoomEditResponse getRoomEditResponseById(Long id) {
+        return roomRepository.getRoomEditResponseById(id);
     }
 }

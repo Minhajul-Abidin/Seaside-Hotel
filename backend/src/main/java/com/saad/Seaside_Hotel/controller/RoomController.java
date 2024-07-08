@@ -4,6 +4,7 @@ import com.saad.Seaside_Hotel.exception.PictureRetrievalException;
 import com.saad.Seaside_Hotel.model.BookedRoom;
 import com.saad.Seaside_Hotel.model.Room;
 import com.saad.Seaside_Hotel.response.BookedRoomResponse;
+import com.saad.Seaside_Hotel.response.RoomEditResponse;
 import com.saad.Seaside_Hotel.response.RoomResponse;
 import com.saad.Seaside_Hotel.response.RoomTableResponse;
 import com.saad.Seaside_Hotel.service.IBookedRoomService;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Blob;
@@ -79,6 +81,32 @@ public class RoomController {
     public ResponseEntity<List<RoomTableResponse>> getAllRoomsForTable(){
         List<RoomTableResponse> roomTableResponses = roomService.getAllRoomsForTable();
         return ResponseEntity.ok(roomTableResponses);
+    }
+
+    // controller function to edit the room by id
+    @PutMapping("/{id}")
+    public ResponseEntity<RoomEditResponse> editRoom(
+            @PathVariable Long id,
+            @RequestParam(required = false) String roomType,
+            @RequestParam(required = false) BigDecimal roomPrice,
+            @RequestParam(required = false) MultipartFile picture) throws IOException, SQLException {
+        byte[] pictureBytes = picture != null ? picture.getBytes() : null;
+        Room room = roomService.editRoom(id, roomType, roomPrice, pictureBytes);
+        RoomEditResponse roomEditResponse = getRoomEditResponse(room);
+        return ResponseEntity.ok(roomEditResponse);
+    }
+
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<RoomEditResponse> getRoomEditResponseById(
+            @PathVariable Long id
+    ){
+        return ResponseEntity.ok(roomService.getRoomEditResponseById(id));
+    }
+
+    // helper method to convert room object to roomEditResponse object to send to frontend
+    private RoomEditResponse getRoomEditResponse(Room room) throws SQLException {
+        return new RoomEditResponse(room.getId(),
+                room.getRoomType(), room.getRoomPrice(), room.getPicture());
     }
 
     // helper method to convert room object to roomResponse object to send to frontend
