@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        LakesNeueRegular :['LakesNeueRegular'],
+        TypewcondRegular : ['Typewcond-Regular'],
+        CinzelRegular : ['Cinzel-Regular']
+      }
+    },
   },
   plugins: [],
 }
