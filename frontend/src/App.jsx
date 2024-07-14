@@ -1,18 +1,19 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import './App.css'
-import AddRoom from './components/room/AddRoom'
-import { Outlet } from 'react-router-dom'
-import Footer from './components/layout/Footer'
+import "./App.css";
+import AddRoom from "./components/room/AddRoom";
+import { Outlet } from "react-router-dom";
+import Footer from "./components/layout/Footer";
+import Header from "./components/header/Header";
 
 function App() {
-
   return (
     <>
-      <Outlet/>
-      <Footer/>
+      <Header />
+      <Outlet />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
