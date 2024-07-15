@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily:{
         LakesNeueRegular :['LakesNeueRegular'],
+        LakesNeueDemiBold :['LakesNeueDemiBold'],
         TypewcondRegular : ['Typewcond-Regular'],
         CinzelRegular : ['Cinzel-Regular']
       }

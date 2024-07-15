@@ -6,6 +6,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Home from './components/home/Home.jsx'
 import AddRoom from './components/room/AddRoom.jsx'
 import EditRoom from './components/room/EditRoom.jsx' 
+import About from './components/About/About.jsx'
+import AllRoom from './components/room/AllRoom.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,6 +15,8 @@ const router = createBrowserRouter(
       <Route path = ''  element = {<Home/>}/>
       <Route path='admin/room/add' element = {<AddRoom/>}/>
       <Route path='admin/room/edit/:roomId' element = {<EditRoom/>}/>
+      <Route path='about' element = {<About/>}/>
+      <Route path='rooms' element = {<AllRoom/>}/>
     </Route>
   )
 )

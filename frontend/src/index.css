@@ -19,3 +19,8 @@
     src: local("CinzelDecorative-Regular"),
     url("./assets/fonts/CinzelDecorative-Regular.otf")  format("opentype");
 }
+@font-face {
+    font-family: "LakesNeueDemiBold";
+    src: local("TTLakesNeueTrialExtendedDemiBold"),
+    url("./assets/fonts/TTLakesNeueTrialExtendedDemiBold.ttf")  format("truetype");
+}
