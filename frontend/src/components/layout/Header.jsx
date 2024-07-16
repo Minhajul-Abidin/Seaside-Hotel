@@ -4,7 +4,7 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();
   return (
-    <header className="shadow z-50 top-0 relative font-LakesNeueDemiBold">
+    <header className="z-50 top-0 relative font-LakesNeueDemiBold">
       <nav
         className={` px-4 lg:px-6 ${
           location.pathname === "/"
@@ -99,14 +99,14 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
-                  to="/about"
+                  to="/contact"
                   className={({ isActive }) =>
                     `block py-2 pr-4 pl-3 duration-200 border-b ${
                       isActive ? "text-[#00634D]" : ""
                     } border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-[#00634D] lg:p-0`
                   }
                 >
-                  About
+                  Contact
                 </NavLink>
               </li>
               <li>
