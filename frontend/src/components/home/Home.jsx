@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BackImg from '../../assets/images/beach.png';
 import resortImg from '../../assets/images/resort.png'
+import { getThreeRoomsForHomePage } from "../utils/apiFunctions";
+import RoomCard from "../room/RoomCard";
 const Home = () => {
+  const [rooms, setRooms] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchThreeRooms = async () => {
+    setIsLoading(true);
+    try {
+      const data = await getThreeRoomsForHomePage();
+      setRooms(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error)
+    }
+  };
+
+  useEffect(() => {
+    fetchThreeRooms();
+  }, []);
+  
     return (
       <>
         <section className="relative h-screen w-full mt-[-4rem] z-10">
           <div className="absolute inset-0 overflow-clip">
             <img
               src={BackImg}
-              className="w-full h-full  object-fill"
+              className="w-full h-full object-cover lg:object-fill"
               alt="Background"
             />
           </div>
@@ -53,7 +73,22 @@ const Home = () => {
           </div>
         </section>
 
-        {/* TODO -- Will add more sections */}
+        <section className="flex justify-around relative h-fit  w-full bg-[#EFEDE7]">
+          <div className="relative w-full">
+            <div className="mx-0 flex flex-col">
+              <div>
+              <h1 className="text-center font-CinzelRegular  mt-8 text-3xl font-bold tracking-tight text-[#00634D] md:text-4xl lg:text-6xl">
+                  Accomodation
+                </h1>
+              </div>
+              <div className="flex flex-col lg:flex-row justify-around">
+              {rooms.map((room) => (
+                <RoomCard room={room} key={room.id}/>
+              ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </>
     );
 }

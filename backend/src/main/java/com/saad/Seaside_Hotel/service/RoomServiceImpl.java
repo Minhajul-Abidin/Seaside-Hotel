@@ -4,10 +4,11 @@ import com.saad.Seaside_Hotel.exception.InternalServerException;
 import com.saad.Seaside_Hotel.exception.ResourceNotFoundException;
 import com.saad.Seaside_Hotel.model.Room;
 import com.saad.Seaside_Hotel.repository.RoomRepository;
-import com.saad.Seaside_Hotel.response.RoomEditResponse;
+import com.saad.Seaside_Hotel.response.RoomWOBResponse;
 import com.saad.Seaside_Hotel.response.RoomTableResponse;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -78,7 +79,13 @@ public class RoomServiceImpl implements IRoomService{
     }
 
     @Override
-    public RoomEditResponse getRoomEditResponseById(Long id) {
+    public RoomWOBResponse getRoomEditResponseById(Long id) {
         return roomRepository.getRoomEditResponseById(id);
+    }
+
+    @Override
+    public List<RoomWOBResponse> getThreeRoomsForHomePage() {
+        Pageable pageable = PageRequest.of(0, 3);
+        return roomRepository.getThreeRoomsForHomePage(pageable);
     }
 }

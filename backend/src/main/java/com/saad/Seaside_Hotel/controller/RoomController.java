@@ -4,18 +4,16 @@ import com.saad.Seaside_Hotel.exception.PictureRetrievalException;
 import com.saad.Seaside_Hotel.model.BookedRoom;
 import com.saad.Seaside_Hotel.model.Room;
 import com.saad.Seaside_Hotel.response.BookedRoomResponse;
-import com.saad.Seaside_Hotel.response.RoomEditResponse;
+import com.saad.Seaside_Hotel.response.RoomWOBResponse;
 import com.saad.Seaside_Hotel.response.RoomResponse;
 import com.saad.Seaside_Hotel.response.RoomTableResponse;
 import com.saad.Seaside_Hotel.service.IBookedRoomService;
 import com.saad.Seaside_Hotel.service.IRoomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Blob;
@@ -85,27 +83,33 @@ public class RoomController {
 
     // controller function to edit the room by id
     @PutMapping("/{id}")
-    public ResponseEntity<RoomEditResponse> editRoom(
+    public ResponseEntity<RoomWOBResponse> editRoom(
             @PathVariable Long id,
             @RequestParam(required = false) String roomType,
             @RequestParam(required = false) BigDecimal roomPrice,
             @RequestParam(required = false) MultipartFile picture) throws IOException, SQLException {
         byte[] pictureBytes = picture != null ? picture.getBytes() : null;
         Room room = roomService.editRoom(id, roomType, roomPrice, pictureBytes);
-        RoomEditResponse roomEditResponse = getRoomEditResponse(room);
-        return ResponseEntity.ok(roomEditResponse);
+        RoomWOBResponse roomWOBResponse = getRoomEditResponse(room);
+        return ResponseEntity.ok(roomWOBResponse);
     }
 
     @GetMapping("/edit/{id}")
-    public ResponseEntity<RoomEditResponse> getRoomEditResponseById(
+    public ResponseEntity<RoomWOBResponse> getRoomEditResponseById(
             @PathVariable Long id
     ){
         return ResponseEntity.ok(roomService.getRoomEditResponseById(id));
     }
 
+    @GetMapping("/threeRooms")
+    public ResponseEntity<List<RoomWOBResponse>> getThreeRoomsForHomePage(){
+        List<RoomWOBResponse> roomWOBResponses = roomService.getThreeRoomsForHomePage();
+        return ResponseEntity.ok(roomWOBResponses);
+    }
+
     // helper method to convert room object to roomEditResponse object to send to frontend
-    private RoomEditResponse getRoomEditResponse(Room room) throws SQLException {
-        return new RoomEditResponse(room.getId(),
+    private RoomWOBResponse getRoomEditResponse(Room room) throws SQLException {
+        return new RoomWOBResponse(room.getId(),
                 room.getRoomType(), room.getRoomPrice(), room.getPicture());
     }
 

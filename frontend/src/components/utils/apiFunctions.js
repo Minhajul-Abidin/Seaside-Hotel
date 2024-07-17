@@ -85,3 +85,14 @@ export async function editRoom(id, roomType, roomPrice, picture){
         throw new Error("Error : Editing room")
     }
 }
+
+// Function to get 3 rooms for home page
+export async function getThreeRoomsForHomePage(){
+    try{
+        const response = await api.get("/rooms/threeRooms")
+        return response.data
+    }
+    catch(error){
+        throw new Error("Error : Fetching room types")
+    }
+}

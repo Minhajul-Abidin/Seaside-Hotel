@@ -1,11 +1,11 @@
 package com.saad.Seaside_Hotel.repository;
 
 import com.saad.Seaside_Hotel.model.Room;
-import com.saad.Seaside_Hotel.response.RoomEditResponse;
+import com.saad.Seaside_Hotel.response.RoomWOBResponse;
 import com.saad.Seaside_Hotel.response.RoomTableResponse;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -18,7 +18,11 @@ public interface RoomRepository extends JpaRepository<Room,Long> {
             "(r.id, r.roomType, r.roomPrice, r.isBooked) FROM Room r")
     List<RoomTableResponse> findAllForTable();
 
-    @Query("SELECT new com.saad.Seaside_Hotel.response.RoomEditResponse" +
+    @Query("SELECT new com.saad.Seaside_Hotel.response.RoomWOBResponse" +
             "(r.id, r.roomType, r.roomPrice, r.picture) FROM Room r WHERE r.id = :id")
-    RoomEditResponse getRoomEditResponseById(Long id);
+    RoomWOBResponse getRoomEditResponseById(Long id);
+
+    @Query("SELECT new com.saad.Seaside_Hotel.response.RoomWOBResponse" +
+            "(r.id, r.roomType, r.roomPrice, r.picture) FROM Room r")
+    List<RoomWOBResponse> getThreeRoomsForHomePage(Pageable pageable);
 }

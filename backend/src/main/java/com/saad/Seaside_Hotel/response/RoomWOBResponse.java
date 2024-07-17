@@ -14,14 +14,14 @@ import java.sql.SQLException;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomEditResponse {
+public class RoomWOBResponse {
     private Long id;
     private String roomType;
     private BigDecimal roomPrice;
     private String picture;
 
 
-    public RoomEditResponse(
+    public RoomWOBResponse(
             Long id, String roomType,
             BigDecimal roomPrice, Blob pictureBlob
           ) throws SQLException {
