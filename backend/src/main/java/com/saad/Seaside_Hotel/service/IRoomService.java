@@ -26,4 +26,6 @@ public interface IRoomService {
     RoomWOBResponse getRoomEditResponseById(Long id);
 
     List<RoomWOBResponse> getThreeRoomsForHomePage();
+
+    List<RoomWOBResponse> getAllRoomsForClient();
 }

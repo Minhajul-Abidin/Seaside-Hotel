@@ -107,6 +107,12 @@ public class RoomController {
         return ResponseEntity.ok(roomWOBResponses);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<RoomWOBResponse>> getAllRoomsForClient(){
+        List<RoomWOBResponse> roomWOBResponses = roomService.getAllRoomsForClient();
+        return ResponseEntity.ok(roomWOBResponses);
+    }
+
     // helper method to convert room object to roomEditResponse object to send to frontend
     private RoomWOBResponse getRoomEditResponse(Room room) throws SQLException {
         return new RoomWOBResponse(room.getId(),

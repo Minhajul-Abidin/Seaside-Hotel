@@ -9,9 +9,9 @@ const RoomPaginator = ({ currentPage, totalPages, onPageChange }) => {
         {pageNumbers.map((pageNumber) => (
           <li
             key={pageNumber}
-            className={`mx-1 flex h-9 w-9 items-center justify-center rounded-full ${
+            className={`mx-1 mb-5 flex h-9 w-9 items-center justify-center rounded-full ${
               currentPage === pageNumber
-                ? "bg-gradient-to-tr from-blue-600 to-blue-400 p-0 text-sm text-white shadow-md shadow-blue-500/20"
+                ? "bg-gradient-to-tr from-[#00634D] to-[#00634D] p-0 text-sm text-white shadow-md shadow-blue-500/20"
                 : "border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 hover:bg-light-300"
             } transition duration-150 ease-in-out`}
           >

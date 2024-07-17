@@ -8,8 +8,8 @@ const RoomCard = ({room}) => {
           src={`data:image/jpeg;base64,${room.picture}`}
           alt="Room Picture"
         />
-        <p className="mt-3 font-CinzelRegular text-2xl text-center">
-          {room.roomType}
+        <p className="mt-3 font-CinzelRegular text-[#00634D] font-bold text-2xl text-center">
+          {room.roomType.toUpperCase()}
         </p>
         <p className="font-TypewcondRegular text-center text-sm">
           from ₹{room.roomPrice} a night

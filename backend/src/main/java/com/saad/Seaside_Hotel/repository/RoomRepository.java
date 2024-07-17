@@ -25,4 +25,8 @@ public interface RoomRepository extends JpaRepository<Room,Long> {
     @Query("SELECT new com.saad.Seaside_Hotel.response.RoomWOBResponse" +
             "(r.id, r.roomType, r.roomPrice, r.picture) FROM Room r")
     List<RoomWOBResponse> getThreeRoomsForHomePage(Pageable pageable);
+
+    @Query("SELECT new com.saad.Seaside_Hotel.response.RoomWOBResponse" +
+            "(r.id, r.roomType, r.roomPrice, r.picture) FROM Room r")
+    List<RoomWOBResponse> getAllRoomsForClient();
 }

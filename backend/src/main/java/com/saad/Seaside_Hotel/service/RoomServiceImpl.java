@@ -88,4 +88,9 @@ public class RoomServiceImpl implements IRoomService{
         Pageable pageable = PageRequest.of(0, 3);
         return roomRepository.getThreeRoomsForHomePage(pageable);
     }
+
+    @Override
+    public List<RoomWOBResponse> getAllRoomsForClient() {
+        return roomRepository.getAllRoomsForClient();
+    }
 }

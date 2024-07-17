@@ -57,9 +57,11 @@ const Home = () => {
                   Welcome to your luxirious home away from home
                 </h1>
                 <p className="mt-8 text-lg text-[#EFEDE7] font-TypewcondRegular text-center">
-                Escape to the seaside where luxury meets tranquility. Bask in the serene sounds of the waves,
-                and enjoy breathtaking ocean views from every corner. Our resort offers an exquisite blend of
-                comfort and natural beauty, designed to provide you with an unforgettable coastal retreat.
+                  Escape to the seaside where luxury meets tranquility. Bask in
+                  the serene sounds of the waves, and enjoy breathtaking ocean
+                  views from every corner. Our resort offers an exquisite blend
+                  of comfort and natural beauty, designed to provide you with an
+                  unforgettable coastal retreat.
                 </p>
               </div>
               <div className="relative my-auto lg:col-span-5 lg:-mr-8 xl:col-span-6">
@@ -77,15 +79,21 @@ const Home = () => {
           <div className="relative w-full">
             <div className="mx-0 flex flex-col">
               <div>
-              <h1 className="text-center font-CinzelRegular  mt-8 text-3xl font-bold tracking-tight text-[#00634D] md:text-4xl lg:text-6xl">
+                <h1 className="text-center font-CinzelRegular  mt-8 text-3xl font-bold tracking-tight text-[#00634D] md:text-4xl lg:text-6xl">
                   Accomodation
                 </h1>
               </div>
-              <div className="flex flex-col lg:flex-row justify-around">
-              {rooms.map((room) => (
-                <RoomCard room={room} key={room.id}/>
-              ))}
-              </div>
+              {isLoading ? (
+                <div className="size-fit mx-auto my-56 transform translate-x-1/2 translate-y-1/2 ">
+                  <div className="border-t-transparent border-solid animate-spin  rounded-full border-[#00634D] border-8 h-10 w-10 "></div>
+                </div>
+              ) : (
+                <div className="flex flex-col lg:flex-row justify-around">
+                  {rooms.map((room) => (
+                    <RoomCard room={room} key={room.id} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
