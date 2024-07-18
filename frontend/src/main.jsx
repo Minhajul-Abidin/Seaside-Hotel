@@ -9,6 +9,8 @@ import EditRoom from './components/room/EditRoom.jsx'
 import About from './components/about/About.jsx'
 import AllRoom from './components/room/AllRoom.jsx'
 import Contact from './components/contact/Contact.jsx'
+import AdminPanal from './components/admin/AdminPanal.jsx'
+import ExistingRoom from './components/room/ExistingRoom.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +18,8 @@ const router = createBrowserRouter(
       <Route path = ''  element = {<Home/>}/>
       <Route path='admin/room/add' element = {<AddRoom/>}/>
       <Route path='admin/room/edit/:roomId' element = {<EditRoom/>}/>
+      <Route path='admin/room/all' element = {<ExistingRoom/>}/>
+      <Route path='admin' element = {<AdminPanal/>}/>
       <Route path='about' element = {<About/>}/>
       <Route path='rooms' element = {<AllRoom/>}/>
       <Route path='contact' element = {<Contact/>}/>
